@@ -27,26 +27,27 @@
         color:rgb(253, 1, 1);
         border-color:rgb(7, 0, 38);
     }
+    .mb-4 {
+        color:rgb(253, 1, 1);
+    }
 </style>
+<div class="video-background">
+    <iframe 
+        src="https://youtube.com/embed/9OhgHSFAnRM?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=9OhgHSFAnRM&modestbranding=1" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" 
+        allowfullscreen
+    ></iframe>
+</div>
 <div class="container mt-5">
-    <div class="user-menu">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Menu
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% if app.user %}
-                    <p class="dropdown-item-text">Vous êtes connecté en tant que : {{ app.user.email }}</p>
-                    <a href="{{ path('app_profile') }}" class="dropdown-item">Profil</a>
-                    <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
-                {% else %}
-                    <p class="dropdown-item-text">Veuillez vous connecter</p>
-                    <a href="{{ path('app_login') }}" class="dropdown-item">Connexion</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
+    {% if app.user %}
+        <p class="dropdown-item-text">Vous êtes connecté en tant que : {{ app.user.email }}</p>
+        <a href="{{ path('app_profile') }}" class="dropdown-item">Profil</a>
+        <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+    {% else %}
+        <p class="dropdown-item-text">Veuillez vous connecter</p>
+        <a href="{{ path('app_login') }}" class="dropdown-item">Connexion</a>
+    {% endif %}
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             <h1 class="mb-4">Bienvenue sur notre Travel E-Shop</h1>
