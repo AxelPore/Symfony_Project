@@ -39,6 +39,19 @@
     .card {
         background-color:rgb(29, 0, 134);
     }
+    .card .card-image-top {
+        width: 294.4px;
+        height: 165.8px;
+    }
+    .link .dropdown-item {
+        color:rgb(173, 65, 65);
+        background-color:rgb(42, 0, 81);
+        border: 2px solid rgb(184, 189, 232);
+        border-radius: 40px;
+        padding: 10px;
+        width: 150px;
+        margin-top: 10px;
+    }
 </style>
 <div class="video-background">
     <iframe 
@@ -50,12 +63,15 @@
 </div>
 <div class="container mt-5">
     {% if app.user %}
-        <p class="dropdown-item-text">Vous êtes connecté en tant que : {{ app.user.email }}</p>
-        <a href="{{ path('app_profile') }}" class="dropdown-item">Profil</a>
-        <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+        <div class="link">
+            <a href="{{ path('app_profile') }}" class="dropdown-item">Profil</a>
+            <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+        </div>
     {% else %}
-        <p class="dropdown-item-text">Veuillez vous connecter</p>
-        <a href="{{ path('app_login') }}" class="dropdown-item">Connexion</a>
+        <div class="link">
+            <p class="dropdown-item-text">Veuillez vous connecter</p>
+            <a href="{{ path('app_login') }}" class="dropdown-item">Connexion</a>
+        </div>
     {% endif %}
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
@@ -79,7 +95,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="path/to/image1.jpg" class="card-img-top" alt="Destination 1">
+                <img src="https://c4.wallpaperflare.com/wallpaper/965/883/624/manga-one-piece-wallpaper-preview.jpg" class="card-img-top" alt="Destination 1">
                 <div class="card-body">
                     <h5 class="card-title">Destination 1</h5>
                     <p class="card-text">Description de la destination 1.</p>
@@ -89,7 +105,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="path/to/image2.jpg" class="card-img-top" alt="Destination 2">
+                <img src="https://w0.peakpx.com/wallpaper/776/134/HD-wallpaper-konoha-house-scenic-naruto-naruto-shippuuden-home-beautiful-mountain-city-multicolor-anime-color-shippuuden-beauty-scenery-ninja-shinobi-town-sky-building-scene-landscape.jpg" class="card-img-top" alt="Destination 2">
                 <div class="card-body">
                     <h5 class="card-title">Destination 2</h5>
                     <p class="card-text">Description de la destination 2.</p>
@@ -99,7 +115,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="path/to/image3.jpg" class="card-img-top" alt="Destination 3">
+                <img src="https://ancdn.fancaps.net/14684214.jpg" class="card-img-top" alt="Destination 3">
                 <div class="card-body">
                     <h5 class="card-title">Destination 3</h5>
                     <p class="card-text">Description de la destination 3.</p>
@@ -115,7 +131,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="path/to/promo1.jpg" class="card-img-top" alt="Promo 1">
+                <img src="https://c4.wallpaperflare.com/wallpaper/352/570/570/warhammer-40k-space-marines-spaceships-hd-painting-of-black-castle-with-airships-wallpaper-preview.jpg" class="card-img-top" alt="Promo 1">
                 <div class="card-body">
                     <h5 class="card-title">Promo 1</h5>
                     <p class="card-text">Détails de la promotion 1.</p>
@@ -125,7 +141,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="path/to/promo2.jpg" class="card-img-top" alt="Promo 2">
+                <img src="https://i.pinimg.com/736x/7a/5e/72/7a5e72e46eef38079c9a0494d34b41bb.jpg" class="card-img-top" alt="Promo 2">
                 <div class="card-body">
                     <h5 class="card-title">Promo 2</h5>
                     <p class="card-text">Détails de la promotion 2.</p>
@@ -135,7 +151,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="path/to/promo3.jpg" class="card-img-top" alt="Promo 3">
+                <img src="https://images4.alphacoders.com/865/thumb-1920-865573.png" class="card-img-top" alt="Promo 3">
                 <div class="card-body">
                     <h5 class="card-title">Promo 3</h5>
                     <p class="card-text">Détails de la promotion 3.</p>
