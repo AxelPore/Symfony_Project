@@ -18,15 +18,18 @@
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
             <div class="auth-container p-4 p-sm-5">
                 <div class="text-center mb-4">
+
                     <div class="brand-logo">
                         <i class="fas fa-shopping-bag"></i>
                     </div> 
                     <h1 class="h3 text-white mb-2">Inscription</h1>
                     <p class="text-white-50">Rejoignez notre communauté</p>
+                    {{ form_errors(registrationForm)}}
                 </div>
 
                 {{ form_start(registrationForm, {'attr': {'class': 'needs-validation'}}) }}
                     <div class="mb-4">
+                    {{ form_errors(registrationForm.email) }}
                         <label for="{{ registrationForm.email.vars.id }}" class="form-label text-white">
                             <i class="fas fa-envelope me-2"></i>Email
                         </label>
@@ -51,10 +54,6 @@
                     </div>
 
                     <div class="mb-4 form-check">
-                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
-                        <label class="form-check-label text-white" for="{{ registrationForm.agreeTerms.vars.id }}">
-                            <i class="fas fa-check-circle me-2"></i>J'accepte les conditions
-                        </label>
                     </div>
 
                     <div class="d-grid gap-3">
