@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4">Mon Profil</h1>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Informations du compte</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Email:</strong> {{ user.email }}
+                        </li>
+                        {# Add more user information fields here as needed #}
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-3">
+                <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

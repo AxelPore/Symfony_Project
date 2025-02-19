@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+{# Vidéo YouTube en arrière-plan #}
+<div class="video-background">
+    <iframe 
+        src="https://youtube.com/embed/_QsTUfwHZk4?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=_QsTUfwHZk4&modestbranding=1" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" 
+        allowfullscreen
+    ></iframe>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+            <div class="auth-container p-4 p-sm-5">
+                <div class="text-center mb-4">
+                    <div class="brand-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h1 class="h3 text-white mb-2">Inscription</h1>
+                    <p class="text-white-50">Rejoignez notre communauté</p>
+                </div>
+
+                {{ form_start(registrationForm, {'attr': {'class': 'needs-validation'}}) }}
+                    <div class="mb-4">
+                        <label for="{{ registrationForm.email.vars.id }}" class="form-label text-white">
+                            <i class="fas fa-envelope me-2"></i>Email
+                        </label>
+                        {{ form_widget(registrationForm.email, {
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Votre adresse email'
+                            }
+                        }) }}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ registrationForm.plainPassword.vars.id }}" class="form-label text-white">
+                            <i class="fas fa-lock me-2"></i>Mot de passe
+                        </label>
+                        {{ form_widget(registrationForm.plainPassword, {
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Votre mot de passe'
+                            }
+                        }) }}
+                    </div>
+
+                    <div class="mb-4 form-check">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                        <label class="form-check-label text-white" for="{{ registrationForm.agreeTerms.vars.id }}">
+                            <i class="fas fa-check-circle me-2"></i>J'accepte les conditions
+                        </label>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-user-plus me-2"></i>S'inscrire
+                        </button>
+                        
+                        <a href="{{ path('app_login') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-sign-in-alt me-2"></i>Déjà un compte ? Se connecter
+                        </a>
+                    </div>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+{# Vidéo YouTube en arrière-plan #}
+<div class="video-background">
+    <iframe 
+        src="https://youtube.com/embed/_QsTUfwHZk4?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=_QsTUfwHZk4&modestbranding=1" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" 
+        allowfullscreen
+    ></iframe>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+            <div class="auth-container p-4 p-sm-5">
+                <div class="text-center mb-4">
+                    <div class="brand-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h1 class="h3 text-white mb-2">Connexion</h1>
+                    <p class="text-white-50">Bienvenue sur notre plateforme</p>
+                </div>
+
+                {% if error %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+
+                <form method="post">
+                    <div class="mb-4">
+                        <label for="username" class="form-label">
+                            <i class="fas fa-envelope me-2"></i>Email
+                        </label>
+                        <input type="email" value="{{ last_username }}" name="_username" id="username" 
+                               class="form-control" required autofocus>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label">
+                            <i class="fas fa-lock me-2"></i>Mot de passe
+                        </label>
+                        <input type="password" name="_password" id="password" 
+                               class="form-control" required>
+                    </div>
+
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me">
+                        <label class="form-check-label" for="remember_me">
+                            Se souvenir de moi
+                        </label>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                        </button>
+                        
+                        <a href="{{ path('app_register') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-user-plus me-2"></i>Créer un compte
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
