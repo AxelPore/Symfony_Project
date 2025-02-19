@@ -1,22 +1,135 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Travel E-Shop{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .search-bar {
+            border: 2px solid #ced4da;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .user-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .user-menu .btn {
+            margin-left: 10px;
+        }
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
 <div class="container mt-5">
+    <div class="user-menu">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Menu
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% if app.user %}
+                    <p class="dropdown-item-text">Vous êtes connecté en tant que : {{ app.user.email }}</p>
+                    <a href="{{ path('app_profile') }}" class="dropdown-item">Profil</a>
+                    <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+                {% else %}
+                    <p class="dropdown-item-text">Veuillez vous connecter</p>
+                    <a href="{{ path('app_login') }}" class="dropdown-item">Connexion</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
-            <h1 class="mb-4">Bienvenue sur la page d'accueil</h1>
-            
-            {% if app.user %}
-                <p class="mb-4">Vous êtes connecté en tant que : {{ app.user.email }}</p>
-                <a href="{{ path('app_profile') }}" class="btn btn-info mr-2">Profil</a>
-                <a href="{{ path('app_logout') }}" class="btn btn-danger">Déconnexion</a>
+            <h1 class="mb-4">Bienvenue sur notre Travel E-Shop</h1>
+        </div>
+    </div>
 
-            {% else %}
-                <p class="mb-4">Veuillez vous connecter</p>
-                <a href="{{ path('app_login') }}" class="btn btn-primary">Connexion</a>
-            {% endif %}
+    <div class="row mt-5">
+        <div class="col-md-12 text-center">
+            <h2 class="mb-4">Trouvez votre prochaine destination</h2>
+            <form class="form-inline justify-content-center">
+                <input class="form-control search-bar mr-2" type="search" placeholder="Recherche de destinations" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Rechercher</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12 text-center">
+            <h2 class="mb-4">Destinations populaires</h2>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/image1.jpg" class="card-img-top" alt="Destination 1">
+                <div class="card-body">
+                    <h5 class="card-title">Destination 1</h5>
+                    <p class="card-text">Description de la destination 1.</p>
+                    <a href="#" class="btn btn-primary">Explorer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/image2.jpg" class="card-img-top" alt="Destination 2">
+                <div class="card-body">
+                    <h5 class="card-title">Destination 2</h5>
+                    <p class="card-text">Description de la destination 2.</p>
+                    <a href="#" class="btn btn-primary">Explorer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/image3.jpg" class="card-img-top" alt="Destination 3">
+                <div class="card-body">
+                    <h5 class="card-title">Destination 3</h5>
+                    <p class="card-text">Description de la destination 3.</p>
+                    <a href="#" class="btn btn-primary">Explorer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12 text-center">
+            <h2 class="mb-4">Promotions de voyage</h2>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/promo1.jpg" class="card-img-top" alt="Promo 1">
+                <div class="card-body">
+                    <h5 class="card-title">Promo 1</h5>
+                    <p class="card-text">Détails de la promotion 1.</p>
+                    <a href="#" class="btn btn-primary">En profiter</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/promo2.jpg" class="card-img-top" alt="Promo 2">
+                <div class="card-body">
+                    <h5 class="card-title">Promo 2</h5>
+                    <p class="card-text">Détails de la promotion 2.</p>
+                    <a href="#" class="btn btn-primary">En profiter</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="path/to/promo3.jpg" class="card-img-top" alt="Promo 3">
+                <div class="card-body">
+                    <h5 class="card-title">Promo 3</h5>
+                    <p class="card-text">Détails de la promotion 3.</p>
+                    <a href="#" class="btn btn-primary">En profiter</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
