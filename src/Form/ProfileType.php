@@ -28,15 +28,19 @@ class ProfileType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '5M',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
+                            'image/webp',
                         ],
-                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPG ou PNG)',
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPG, PNG ou WebP)',
                     ])
                 ],
-                'attr' => ['class' => 'form-control']
+                'attr' => [
+                    'class' => 'form-control',
+                    'accept' => 'image/jpeg,image/png,image/webp'
+                ]
             ])
             ->add('biography', TextareaType::class, [
                 'required' => false,

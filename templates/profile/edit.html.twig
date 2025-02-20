@@ -31,56 +31,66 @@
     }
 
     .form-control {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 10px;
-        color: #fff;
-        padding: 0.8rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.6);
     }
 
     .form-control:focus {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.3);
-        color: #fff;
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.9);
         box-shadow: none;
     }
 
-    .btn-save {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #fff;
-        padding: 0.8rem 2rem;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-        width: 100%;
-        margin-top: 1rem;
+    .btn-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
     }
 
-    .btn-save:hover {
+    .btn-save, .btn-cancel, .btn-home {
+        flex: 1;
+        padding: 0.8rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-save {
         background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
     }
 
     .btn-cancel {
-        background: transparent;
+        background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.2);
         color: rgba(255, 255, 255, 0.8);
-        padding: 0.8rem 2rem;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-        width: 100%;
-        margin-top: 1rem;
     }
 
-    .btn-cancel:hover {
-        background: rgba(255, 255, 255, 0.1);
+    .btn-home {
+        background: rgba(29, 0, 134, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-save:hover, .btn-cancel:hover, .btn-home:hover {
+        transform: translateY(-2px);
         color: #fff;
+        background: rgba(255, 255, 255, 0.25);
     }
 </style>
 
 <div class="video-background">
     <iframe 
-        src="https://youtube.com/embed/9OhgHSFAnRM?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=9OhgHSFAnRM&modestbranding=1" 
+        src="https://youtube.com/embed/DiMnGq1zbNU?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=DiMnGq1zbNU&modestbranding=1" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         frameborder="0" 
         allowfullscreen
@@ -118,13 +128,10 @@
                 {{ form_row(form.socialMediaLinks) }}
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <button type="submit" class="btn-save">Enregistrer</button>
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ path('app_profile') }}" class="btn-cancel">Annuler</a>
-                </div>
+            <div class="btn-group">
+                <button type="submit" class="btn-save">Enregistrer</button>
+                <a href="{{ path('app_profile') }}" class="btn-cancel">Annuler</a>
+                <a href="{{ path('app_home') }}" class="btn-home">Accueil</a>
             </div>
         {{ form_end(form) }}
     </div>

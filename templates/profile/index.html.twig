@@ -88,7 +88,7 @@
 
 <div class="video-background">
     <iframe 
-        src="https://youtube.com/embed/9OhgHSFAnRM?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=9OhgHSFAnRM&modestbranding=1" 
+        src="https://youtube.com/embed/DiMnGq1zbNU?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=DiMnGq1zbNU&modestbranding=1" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         frameborder="0" 
         allowfullscreen
@@ -150,9 +150,14 @@
         </div>
 
         <div class="text-center">
-            <a href="{{ path('app_profile_edit') }}" class="edit-button">
-                Modifier le profil
-            </a>
+            <div class="btn-group">
+                <a href="{{ path('app_profile_edit') }}" class="edit-button">
+                    Modifier le profil
+                </a>
+                <a href="{{ path('app_home') }}" class="edit-button" style="margin-left: 1rem;">
+                    Retour à l'accueil
+                </a>
+            </div>
         </div>
     </div>
 </div>
