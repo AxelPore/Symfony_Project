@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Travel E-Shop Terms of Use{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4">Mon Profil</h1>
+            
+            <div class="card">
+                <div class="card-body">
+                    {{ contract_content|nl2br }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
