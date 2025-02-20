@@ -1,0 +1,248 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Full Dive{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: #000;
+    }
+
+    .landing-container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        color: white;
+    }
+
+    .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    .video-background iframe {
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 800px;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        animation: contentFadeIn 2s ease-out;
+    }
+
+    .description {
+        font-size: 1.8rem;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        opacity: 0;
+        animation: textReveal 2s ease-out 1s forwards;
+    }
+
+    .start-button {
+        padding: 1.5rem 3rem;
+        font-size: 1.5rem;
+        background: transparent;
+        border: 2px solid #00ffff;
+        color: #00ffff;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+        opacity: 0;
+        animation: buttonReveal 1s ease-out 2s forwards;
+    }
+
+    .start-button::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: rgba(0, 255, 255, 0.1);
+        transform: translate(-50%, -50%) rotate(45deg);
+        transition: all 0.5s;
+    }
+
+    .start-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    }
+
+    .start-button:hover::before {
+        transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
+    }
+
+    /* Animations */
+    @keyframes contentFadeIn {
+        from { transform: translateY(50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes textReveal {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes buttonReveal {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* SAO Transition */
+    .sao-transition {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: black;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s;
+    }
+
+    .sao-transition.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .sao-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 5rem;
+        font-weight: bold;
+        opacity: 0;
+        text-shadow: 0 0 20px #00ffff;
+    }
+
+    .circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0;
+    }
+
+    .line {
+        position: absolute;
+        background: linear-gradient(90deg, transparent, #00ffff, transparent);
+        height: 2px;
+        width: 200%;
+        opacity: 0;
+    }
+
+    @keyframes lineAnimation {
+        0% { transform: translateX(-100%) rotate(-45deg); opacity: 1; }
+        100% { transform: translateX(100%) rotate(-45deg); opacity: 1; }
+    }
+
+    @keyframes textPulse {
+        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); text-shadow: 0 0 30px #00ffff; }
+        100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+    }
+
+    @keyframes circleExpand {
+        0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        50% { opacity: 0.8; }
+        100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+    }
+</style>
+
+<div class="video-background">
+    <iframe 
+        src="https://youtube.com/embed/9OhgHSFAnRM?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=9OhgHSFAnRM&modestbranding=1" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" 
+        allowfullscreen
+    ></iframe>
+</div>
+
+<div class="landing-container">
+    <div class="content">
+        <p class="description">
+            Plongez dans l'évasion ultime avec notre casque révolutionnaire. 
+            Accédez à des univers immersifs, vivez vos aventures en full dive. 
+            Échappez au quotidien, détendez-vous ou explorez des mondes sans limites—le rêve devient réalité !
+        </p>
+        <button class="start-button" onclick="startTransition()">Commencer le voyage</button>
+    </div>
+</div>
+
+<div class="sao-transition">
+    <div class="sao-lines"></div>
+    <div class="sao-text">LINK START</div>
+</div>
+
+<script>
+function startTransition() {
+    const transition = document.querySelector('.sao-transition');
+    const text = document.querySelector('.sao-text');
+    
+    transition.classList.add('active');
+
+    // Créer les lignes avec des couleurs et positions aléatoires
+    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+    for (let i = 0; i < 10; i++) {
+        const line = document.createElement('div');
+        line.classList.add('line');
+        line.style.top = `${Math.random() * 100}%`;
+        line.style.background = `linear-gradient(90deg, transparent, ${colors[i % colors.length]}, transparent)`;
+        line.style.animation = `lineAnimation 1.5s ${i * 0.1}s linear`;
+        document.querySelector('.sao-lines').appendChild(line);
+    }
+
+    // Créer les cercles avec des couleurs et délais différents
+    colors.forEach((color, i) => {
+        const circle = document.createElement('div');
+        circle.classList.add('circle');
+        circle.style.background = color;
+        circle.style.width = '100px';
+        circle.style.height = '100px';
+        circle.style.left = '50%';
+        circle.style.top = '50%';
+        circle.style.animation = `circleExpand 1s ${1 + i * 0.2}s forwards`;
+        transition.appendChild(circle);
+    });
+
+    // Animation du texte LINK START
+    setTimeout(() => {
+        text.style.animation = 'textPulse 1.5s forwards';
+    }, 800);
+
+    // Son de transition (optionnel)
+    const audio = new Audio('/chemin/vers/votre/son.mp3');  // Ajoutez votre propre son
+    audio.play().catch(e => console.log('Auto-play prevented'));
+
+    // Redirection
+    setTimeout(() => {
+        window.location.href = '{{ path('app_login') }}';
+    }, 3000);
+}
+</script>
+{% endblock %} 

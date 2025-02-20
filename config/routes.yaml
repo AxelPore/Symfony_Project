@@ -8,10 +8,14 @@ app_home:
     path: /home
     controller: App\Controller\HomeController::index
 
-# Redirection de la racine vers login
+app_landing:
+    path: /landing
+    controller: App\Controller\LandingController::index
+
+# Redirection de la racine vers la landing page
 index:
     path: /
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
     defaults:
-        route: 'app_login'
+        route: 'app_landing'
         permanent: true
