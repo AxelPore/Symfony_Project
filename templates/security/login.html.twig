@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Log in!{% endblock %}
 
 {% block body %}
 {# Vidéo YouTube en arrière-plan #}
@@ -33,21 +33,25 @@
                     </div>
                 {% endif %}
 
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
                 <form method="post">
                     <div class="mb-4">
-                        <label for="username" class="form-label">
+                        <label for="inputEmail" class="form-label">
                             <i class="fas fa-envelope me-2"></i>Email
                         </label>
-                        <input type="email" value="{{ last_username }}" name="_username" id="username" 
-                               class="form-control" required autofocus>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
                     </div>
 
                     <div class="mb-4">
-                        <label for="password" class="form-label">
+                        <label for="inputPassword" class="form-label">
                             <i class="fas fa-lock me-2"></i>Mot de passe
                         </label>
-                        <input type="password" name="_password" id="password" 
-                               class="form-control" required>
+                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
                     </div>
 
                     <div class="mb-4 form-check">

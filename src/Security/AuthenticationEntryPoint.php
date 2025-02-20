@@ -15,14 +15,13 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     ) {
     }
 
-    public function start(Request $request, AuthenticationException $authException = null): RedirectResponse
+    public function start(Request $request, ?AuthenticationException $authException = null): RedirectResponse
     {
-        // Si l'utilisateur n'est pas sur la landing page, redirigez-le vers la landing page
-        if ($request->getPathInfo() !== '/') {
-            return new RedirectResponse($this->urlGenerator->generate('app_landing'));
+        // Ajouter le chemin ciblé dans la session
+        if ($request->getPathInfo() !== '/login') {
+            $request->getSession()->set('_security.main.target_path', $request->getUri());
         }
-        
-        // Sinon, redirigez vers la page de login
-        return new RedirectResponse($this->urlGenerator->generate('app_login'));
+
+        return new RedirectResponse($this->urlGenerator->generate('app_landing'));
     }
 } 
