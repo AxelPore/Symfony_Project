@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+<style>
+    .profile-section {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 1000px;
+    }
+
+    .profile-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        display: block;
+        border: 3px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .profile-name {
+        font-size: 2rem;
+        color: #fff;
+        margin: 1rem 0;
+        font-weight: 500;
+    }
+
+    .profile-email {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1rem;
+    }
+
+    .info-section {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    .info-title {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+    }
+
+    .info-content {
+        color: #fff;
+        font-size: 1.1rem;
+        margin-bottom: 0;
+    }
+
+    .edit-button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 2rem;
+    }
+
+    .edit-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    .empty-info {
+        color: rgba(255, 255, 255, 0.4);
+        font-style: italic;
+    }
+</style>
+
+<div class="video-background">
+    <iframe 
+        src="https://youtube.com/embed/9OhgHSFAnRM?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=9OhgHSFAnRM&modestbranding=1" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" 
+        allowfullscreen
+    ></iframe>
+</div>
+
+<div class="container">
+    <div class="profile-section">
+        <div class="profile-header">
+            {% if user.profilePicture %}
+                <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePicture) }}" 
+                     alt="Photo de profil" 
+                     class="profile-image">
+            {% else %}
+                <img src="{{ asset('images/default-avatar.png') }}" 
+                     alt="Photo de profil par défaut" 
+                     class="profile-image">
+            {% endif %}
+            <h1 class="profile-name">{{ user.pseudo ?? 'Utilisateur' }}</h1>
+            <p class="profile-email">{{ user.email }}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="info-section">
+                    <h3 class="info-title">Biographie</h3>
+                    <p class="info-content">
+                        {{ user.biography ?? '<span class="empty-info">Aucune biographie</span>'|raw }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="info-section">
+                    <h3 class="info-title">Localisation</h3>
+                    <p class="info-content">
+                        {{ user.location ?? '<span class="empty-info">Non spécifiée</span>'|raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="info-section">
+                    <h3 class="info-title">Date de naissance</h3>
+                    <p class="info-content">
+                        {{ user.birthDate ? user.birthDate|date('d/m/Y') : '<span class="empty-info">Non spécifiée</span>'|raw }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="info-section">
+                    <h3 class="info-title">Réseaux sociaux</h3>
+                    <p class="info-content">
+                        {{ user.socialMediaLinks ?? '<span class="empty-info">Non spécifiés</span>'|raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ path('app_profile_edit') }}" class="edit-button">
+                Modifier le profil
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

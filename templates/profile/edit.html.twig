@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block body %}
+<style>
+    .edit-section {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 800px;
+    }
+
+    .edit-title {
+        color: #fff;
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-weight: 500;
+    }
+
+    .form-label {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: #fff;
+        padding: 0.8rem;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+        color: #fff;
+        box-shadow: none;
+    }
+
+    .btn-save {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .btn-save:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .btn-cancel {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .btn-cancel:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+</style>
+
+<div class="video-background">
+    <iframe 
+        src="https://youtube.com/embed/9OhgHSFAnRM?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=9OhgHSFAnRM&modestbranding=1" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" 
+        allowfullscreen
+    ></iframe>
+</div>
+
+<div class="container">
+    <div class="edit-section">
+        <h1 class="edit-title">Modifier mon profil</h1>
+        
+        {{ form_start(form) }}
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    {{ form_row(form.pseudo) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.profilePicture) }}
+                </div>
+            </div>
+
+            <div class="mb-4">
+                {{ form_row(form.biography) }}
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    {{ form_row(form.location) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.birthDate) }}
+                </div>
+            </div>
+
+            <div class="mb-4">
+                {{ form_row(form.socialMediaLinks) }}
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn-save">Enregistrer</button>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ path('app_profile') }}" class="btn-cancel">Annuler</a>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %} 
