@@ -1,0 +1,343 @@
+.sao-transition-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none;
+    z-index: 9999;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.sao-transition-active {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.hyperspace-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    perspective: 1000px;
+    display: none;
+}
+
+.hyperspace-tunnel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    transform-style: preserve-3d;
+}
+
+.star-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.star {
+    position: absolute;
+    background: #fff;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    animation: starZoom 2s linear infinite;
+}
+
+.energy-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border: 2px solid #00ffff;
+    border-radius: 50%;
+    animation: energyPulse 1s ease-out infinite;
+    box-shadow: 0 0 50px #00ffff, inset 0 0 50px #00ffff;
+}
+
+.sao-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ffff;
+    font-size: 3em;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px #00ffff;
+    animation: textGlitch 0.5s infinite;
+    white-space: nowrap;
+}
+
+.lightning {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.hex-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, #0066ff22 1px, transparent 1px) 0 0,
+        linear-gradient(#0066ff22 1px, transparent 1px) 0 0;
+    background-size: 50px 50px;
+    transform: perspective(500px) rotateX(60deg);
+    animation: gridMove 2s linear infinite;
+}
+
+@keyframes tunnelRotate {
+    0% { transform: rotateZ(0deg); }
+    100% { transform: rotateZ(360deg); }
+}
+
+@keyframes starZoom {
+    0% {
+        transform: scale(0.1) translateZ(-2000px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2) translateZ(1000px);
+        opacity: 0;
+    }
+}
+
+@keyframes energyPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes textGlitch {
+    0% { transform: translate(-50%, -50%) skew(0deg); }
+    20% { transform: translate(-52%, -50%) skew(-4deg); color: #ff00ff; }
+    40% { transform: translate(-48%, -50%) skew(4deg); color: #00ffff; }
+    60% { transform: translate(-50%, -50%) skew(0deg); }
+    80% { transform: translate(-51%, -50%) skew(2deg); color: #ffff00; }
+    100% { transform: translate(-50%, -50%) skew(0deg); }
+}
+
+@keyframes gridMove {
+    0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+    100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+}
+
+.sao-button {
+    background: linear-gradient(45deg, #0066ff, #00ffff);
+    border: none;
+    padding: 20px 40px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sao-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #00ffff;
+}
+
+.sao-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% { transform: rotate(45deg) translateX(-100%); }
+    100% { transform: rotate(45deg) translateX(100%); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.sao-circles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: none;
+}
+
+.sao-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.link-start-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+    z-index: 10000;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    white-space: nowrap;
+}
+
+.star-line {
+    position: absolute;
+    height: 2px;
+    width: 50px;
+    opacity: 0;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+.star-line.blue {
+    background: linear-gradient(90deg, transparent, #00ffff, transparent);
+}
+
+.star-line.purple {
+    background: linear-gradient(90deg, transparent, #ff00ff, transparent);
+}
+
+@keyframes starTravel {
+    0% {
+        transform: translateX(-100vw) translateZ(-100px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100vw) translateZ(100px);
+        opacity: 0;
+    }
+}
+
+@keyframes circleRotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.link-start-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes textPulse {
+    0% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        text-shadow: 0 0 30px #00ffff;
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+@keyframes textPulseFinal {
+    0% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    20% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        text-shadow: 0 0 30px #00ffff;
+    }
+    80% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+        text-shadow: 0 0 50px #00ffff, 0 0 80px #00ffff;
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+@keyframes contentFadeOut {
+    to {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes textGlowPulse {
+    0% { 
+        text-shadow: 0 0 10px #fff,
+                     0 0 20px #fff,
+                     0 0 30px #00ffff;
+    }
+    50% { 
+        text-shadow: 0 0 20px #fff,
+                     0 0 40px #00ffff,
+                     0 0 60px #00ffff,
+                     0 0 80px #00ffff;
+    }
+    100% { 
+        text-shadow: 0 0 10px #fff,
+                     0 0 20px #fff,
+                     0 0 30px #00ffff;
+    }
+}

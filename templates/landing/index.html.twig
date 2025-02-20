@@ -172,6 +172,14 @@
         50% { opacity: 0.8; }
         100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
     }
+
+    .landing-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
 </style>
 
 <div class="video-background">
@@ -190,7 +198,9 @@
             Accédez à des univers immersifs, vivez vos aventures en full dive. 
             Échappez au quotidien, détendez-vous ou explorez des mondes sans limites—le rêve devient réalité !
         </p>
-        <button class="start-button" onclick="startTransition()">Commencer le voyage</button>
+        <a href="{{ path('app_login') }}" class="sao-link sao-button">
+            DÉMARRER VOTRE VOYAGE
+        </a>
     </div>
 </div>
 
