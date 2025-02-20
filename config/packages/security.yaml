@@ -28,16 +28,16 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
-                enable_csrf: true
+                default_target_path: app_home
+                always_use_default_target_path: true
+            entry_point: App\Security\AuthenticationEntryPoint
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
-        - { path: ^/terms, roles: PUBLIC_ACCESS }
-        - { path: ^/, roles: ROLE_USER }
-        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/, roles: ROLE_USER }  # Tout le reste nécessite d'être connecté
 
 when@test:
     security:
