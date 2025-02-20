@@ -44,6 +44,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'seller')]
     private Collection $products;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pseudo = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePicture = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $biography = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $location = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $birthDate = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $socialMediaLinks = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -160,6 +178,72 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $product->removeSeller($this);
         }
 
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(?string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+        return $this;
+    }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(?string $profilePicture): self
+    {
+        $this->profilePicture = $profilePicture;
+        return $this;
+    }
+
+    public function getBiography(): ?string
+    {
+        return $this->biography;
+    }
+
+    public function setBiography(?string $biography): self
+    {
+        $this->biography = $biography;
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?string $location): self
+    {
+        $this->location = $location;
+        return $this;
+    }
+
+    public function getBirthDate(): ?\DateTimeInterface
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate(?\DateTimeInterface $birthDate): self
+    {
+        $this->birthDate = $birthDate;
+        return $this;
+    }
+
+    public function getSocialMediaLinks(): ?string
+    {
+        return $this->socialMediaLinks;
+    }
+
+    public function setSocialMediaLinks(?string $socialMediaLinks): self
+    {
+        $this->socialMediaLinks = $socialMediaLinks;
         return $this;
     }
 }
