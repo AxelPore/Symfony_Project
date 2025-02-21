@@ -1,0 +1,225 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sell a product{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100vh;
+        background: linear-gradient(135deg, #000000, #1a1a1a);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    .login-container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .login-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 2;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .login-header h1 {
+        color: #ffffff;
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .login-header p {
+        color: #999;
+        font-size: 0.9rem;
+    }
+
+    .input-field {
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 3;
+    }
+
+    .input-field label {
+        display: block;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .input-field input {
+        width: 100%;
+        padding: 0.8rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #ffffff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 3;
+    }
+
+    .input-field input:focus {
+        outline: none;
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        color: #999;
+        position: relative;
+        z-index: 3;
+    }
+
+    .remember-me input[type="checkbox"] {
+        margin-right: 0.5rem;
+        cursor: pointer;
+    }
+
+    .remember-me label {
+        cursor: pointer;
+    }
+
+    .login-button {
+        width: 100%;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 3;
+        background: #ffffff;
+        color: #000000;
+        margin-bottom: 1rem;
+    }
+
+    .login-button:hover {
+        background: #f2f2f2;
+    }
+
+    .register-button {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 3;
+        background: transparent;
+        color: #ffffff;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+    }
+
+    .register-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .alert {
+        background: rgba(255, 59, 48, 0.1);
+        color: #ff3b30;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        position: relative;
+        z-index: 3;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h1>Bienvenue</h1>
+            <p>Entrez ici les informations nécessaire pour vendre votre rêve immersif</p>
+        </div>
+
+        <form method="post">
+            <div class="input-field">
+                <label for="inputProductName">Nom du produit</label>
+                <input 
+                    type="productName" 
+                    name="productName" 
+                    id="inputProductName" 
+                    required 
+                    autofocus
+                >
+            </div>
+
+            <div class="input-field">
+                <label for="inputPrice">Prix</label>
+                <input 
+                    type="price" 
+                    name="price" 
+                    id="inputPrice" 
+                    required
+                >
+            </div>
+
+            <div class="input-field">
+                <label for="inputDescription">Description</label>
+                <input 
+                    type="description" 
+                    name="description" 
+                    id="inputDescription" 
+                >
+            </div>
+
+            <div class="input-field">
+                <label for="inputImage">Image</label>
+                <input 
+                    type="imageLink" 
+                    name="imageLink" 
+                    id="inputImage" 
+                >
+            </div>
+
+            <div class="input-field">
+                <label for="inputStock">Nombre de cet article à vendre</label>
+                <input 
+                    type="stock" 
+                    name="stock" 
+                    id="imputStock" 
+                    required
+                >
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button type="submit" class="login-button">
+                Mettre en vente
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
