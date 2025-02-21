@@ -1,0 +1,1 @@
+clear; symfony console doctrine:schema:update --force --complete; php bin/console doctrine:database:drop --force; php bin/console doctrine:database:create; Remove-Item migrations*.php -Force; php bin/console make:migration; php bin/console doctrine:migrations:migrate; symfony console doctrine:schema:update --force --complete; php bin/console doctrine:schema:validate; clear
