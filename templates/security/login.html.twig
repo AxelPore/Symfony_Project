@@ -9,131 +9,218 @@
         padding: 0;
         overflow: hidden;
         height: 100vh;
-        background: linear-gradient(135deg, #000000, #1a1a1a);
+        background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
-    .login-container {
-        height: 100vh;
+    .background-pattern {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%),
+            linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        z-index: 0;
+    }
+
+    .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+    }
+
+    .video-background iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
         width: 100vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
+        height: 100vh;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        border: none;
+    }
+
+    /* Assombrir légèrement la vidéo pour une meilleure lisibilité */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
         z-index: 1;
     }
 
-    .login-card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        padding: 2rem;
-        border-radius: 20px;
-        width: 90%;
-        max-width: 400px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    .login-container {
         position: relative;
         z-index: 2;
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        padding: 3rem;
+        border-radius: 24px;
+        width: 90%;
+        max-width: 420px;
+        box-shadow: 
+            0 4px 24px -1px rgba(0, 0, 0, 0.2),
+            0 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        margin: 2rem auto;
     }
 
     .login-header {
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
     }
 
     .login-header h1 {
         color: #ffffff;
-        font-size: 1.8rem;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.5px;
     }
 
     .login-header p {
-        color: #999;
-        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1rem;
+        line-height: 1.5;
     }
 
     .input-field {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.75rem;
         position: relative;
-        z-index: 3;
     }
 
     .input-field label {
-        display: block;
-        color: #ffffff;
-        margin-bottom: 0.5rem;
-        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0.75rem;
+        font-size: 0.95rem;
         font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+    .input-field label i {
+        margin-right: 0.5rem;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
     }
 
     .input-field input {
         width: 100%;
-        padding: 0.8rem;
-        background: rgba(255, 255, 255, 0.1);
+        padding: 1rem 1rem 1rem 2.5rem;
+        background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
+        border-radius: 12px;
         color: #ffffff;
         font-size: 1rem;
         transition: all 0.3s ease;
-        position: relative;
-        z-index: 3;
+    }
+
+    .input-field .icon {
+        position: absolute;
+        left: 1rem;
+        top: 2.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1rem;
+        pointer-events: none;
     }
 
     .input-field input:focus {
         outline: none;
-        border-color: rgba(255, 255, 255, 0.3);
-        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
     }
 
     .remember-me {
         display: flex;
         align-items: center;
-        margin-bottom: 1.5rem;
-        color: #999;
-        position: relative;
-        z-index: 3;
+        margin-bottom: 2rem;
+        padding: 0.5rem 0;
     }
 
     .remember-me input[type="checkbox"] {
-        margin-right: 0.5rem;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        margin-right: 0.75rem;
         cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+    }
+
+    .remember-me input[type="checkbox"]:checked {
+        background: #ffffff;
+        border-color: #ffffff;
+    }
+
+    .remember-me input[type="checkbox"]:checked::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #000000;
+        font-size: 14px;
     }
 
     .remember-me label {
+        color: rgba(255, 255, 255, 0.7);
         cursor: pointer;
+        font-size: 0.95rem;
     }
 
     .login-button {
         width: 100%;
-        padding: 0.8rem;
+        padding: 1rem;
         border: none;
-        border-radius: 8px;
+        border-radius: 12px;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
-        position: relative;
-        z-index: 3;
         background: #ffffff;
         color: #000000;
         margin-bottom: 1rem;
+        letter-spacing: 0.3px;
     }
 
     .login-button:hover {
-        background: #f2f2f2;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
     }
 
     .register-button {
         width: 100%;
-        padding: 0.8rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
         font-size: 1rem;
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
-        position: relative;
-        z-index: 3;
         background: transparent;
         color: #ffffff;
         text-decoration: none;
@@ -142,26 +229,55 @@
     }
 
     .register-button:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.2);
     }
 
     .alert {
         background: rgba(255, 59, 48, 0.1);
         color: #ff3b30;
         padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1.5rem;
-        font-size: 0.9rem;
-        position: relative;
-        z-index: 3;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        border: 1px solid rgba(255, 59, 48, 0.2);
+    }
+
+    /* Pour assurer que le contenu reste centré même sur les petits écrans */
+    @media (max-height: 800px) {
+        .login-card {
+            margin: 1rem auto;
+            padding: 2rem;
+        }
+    }
+
+    @media (max-height: 600px) {
+        .login-container {
+            align-items: flex-start;
+            padding: 2rem 0;
+        }
     }
 </style>
 
+<!-- Vidéo en arrière-plan -->
+<div class="video-background">
+    <iframe 
+        src="https://www.youtube.com/embed/9OhgHSFAnRM?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=9OhgHSFAnRM" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" 
+        allowfullscreen
+    ></iframe>
+</div>
+
+<!-- Overlay pour assombrir la vidéo -->
+<div class="overlay"></div>
+
+<!-- Contenu du login -->
 <div class="login-container">
     <div class="login-card">
         <div class="login-header">
             <h1>Bienvenue</h1>
-            <p>Connectez-vous à votre compte</p>
+            <p>Connectez-vous pour accéder à votre espace</p>
         </div>
 
         {% if error %}
@@ -172,7 +288,11 @@
 
         <form method="post">
             <div class="input-field">
-                <label for="inputEmail">Email</label>
+                <label for="inputEmail">
+                    <i class="fas fa-envelope"></i>
+                    Adresse email
+                </label>
+                <i class="fas fa-envelope icon"></i>
                 <input 
                     type="email" 
                     value="{{ last_username }}" 
@@ -180,31 +300,42 @@
                     id="inputEmail" 
                     required 
                     autofocus
+                    placeholder="Votre adresse email"
                 >
             </div>
 
             <div class="input-field">
-                <label for="inputPassword">Mot de passe</label>
+                <label for="inputPassword">
+                    <i class="fas fa-lock"></i>
+                    Mot de passe
+                </label>
+                <i class="fas fa-lock icon"></i>
                 <input 
                     type="password" 
                     name="password" 
                     id="inputPassword" 
                     required
+                    placeholder="Votre mot de passe"
                 >
             </div>
 
             <div class="remember-me">
                 <input type="checkbox" id="remember_me" name="_remember_me">
-                <label for="remember_me">Se souvenir de moi</label>
+                <label for="remember_me">
+                    <i class="fas fa-check-square"></i>
+                    Se souvenir de moi
+                </label>
             </div>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
             <button type="submit" class="login-button">
+                <i class="fas fa-sign-in-alt"></i>
                 Se connecter
             </button>
 
             <a href="{{ path('app_register') }}" class="register-button">
+                <i class="fas fa-user-plus"></i>
                 Créer un compte
             </a>
         </form>

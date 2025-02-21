@@ -24,8 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 5)]
-    private ?string $money = null;
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
+    private ?int $money = 0;
 
     /**
      * @var list<string> The user roles
@@ -68,6 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->money = 0;
         $this->products = new ArrayCollection();
     }
 
