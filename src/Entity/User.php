@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -22,6 +23,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 5)]
+    private ?string $money = null;
 
     /**
      * @var list<string> The user roles
@@ -65,6 +69,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->products = new ArrayCollection();
+    }
+
+    public function getMoney(): ?string
+    {
+        return $this->money;
+    }
+
+    public function addMoney(string $money): static
+    {
+        $this->money += $money;
+
+        return $this;
     }
 
     public function getId(): ?int

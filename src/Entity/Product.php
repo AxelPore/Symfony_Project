@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -25,11 +26,14 @@ class Product
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'products')]
     private Collection $seller;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 2)]
-    private ?string $price = null;
+    #[ORM\Column(length: 255)]
+    private ?string $imgLink = null;
 
-    #[ORM\Column]
-    private ?int $stock = null;
+    #[ORM\Column(type: 'datetime')]
+    private DateTime $sellingDateTime;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 5)]
+    private ?string $price = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
@@ -59,6 +63,7 @@ class Product
     /**
      * @return Collection<int, User>
      */
+    
     public function getSeller(): Collection
     {
         return $this->seller;
@@ -80,6 +85,30 @@ class Product
         return $this;
     }
 
+    public function getSellingDateTime(): ?DateTime
+    {
+        return $this->sellingDateTime;
+    }
+
+    public function setSellingDateTime(DateTime $datetime): static
+    {
+        $this->sellingDateTime = $datetime;
+
+        return $this;
+    }
+
+    public function getImageLink(): ?string
+    {
+        return $this->imgLink;
+    }
+
+    public function setImageLink(string $imgLink): static
+    {
+        $this->imgLink = $imgLink;
+
+        return $this;
+    }
+
     public function getPrice(): ?string
     {
         return $this->price;
@@ -88,18 +117,6 @@ class Product
     public function setPrice(string $price): static
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(int $stock): static
-    {
-        $this->stock = $stock;
 
         return $this;
     }
