@@ -21,6 +21,25 @@
         align-items: center;
     }
 
+    .adm-button {
+        background: rgba(255, 20, 20, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .adm-button:hover {
+        background: rgba(255, 60, 60, 0.7);
+        transform: translateY(-2px);
+        color: white;
+    }
+
     .nav-button {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
@@ -206,6 +225,11 @@
     <div class="user-menu">
         {% if app.user %}
             <div class="link">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_admin') }}" class="adm-button">
+                        <i class="fas fa-sign-in-alt me-2"></i>Logs Admin
+                    </a>
+                {% endif %}
                 <a href="{{ path('app_profile') }}" class="nav-button">
                     <i class="fas fa-user me-2"></i>Profil
                 </a>
@@ -219,6 +243,7 @@
                     <i class="fas fa-sign-in-alt me-2"></i>Connexion
                 </a>
             </div>
+
         {% endif %}
     </div>
 
@@ -243,6 +268,11 @@
                     <h3 class="card-title">One Piece World</h3>
                     <p class="card-text">Embarquez pour une aventure épique dans le monde des pirates.</p>
                     <a href="{{ path('app_detail') }}" class="card-button">Explorer</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}" class="adm-button">
+                            <i class="fas fa-sign-in-alt me-2"></i>Supprimer
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -252,6 +282,11 @@
                     <h3 class="card-title">Village de Konoha</h3>
                     <p class="card-text">Découvrez le monde mystérieux des ninjas.</p>
                     <a href="{{ path('app_detail') }}" class="card-button">Explorer</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}" class="adm-button">
+                            <i class="fas fa-sign-in-alt me-2"></i>Supprimer
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -261,6 +296,11 @@
                     <h3 class="card-title">Monde Fantastique</h3>
                     <p class="card-text">Vivez une expérience unique dans un univers magique.</p>
                     <a href="{{ path('app_detail') }}" class="card-button">Explorer</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}" class="adm-button">
+                            <i class="fas fa-sign-in-alt me-2"></i>Supprimer
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -275,6 +315,11 @@
                     <h3 class="card-title">Voyage Spatial</h3>
                     <p class="card-text">Explorez les confins de l'espace à prix réduit.</p>
                     <a href="{{ path('app_detail') }}" class="card-button">En profiter</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}" class="adm-button">
+                            <i class="fas fa-sign-in-alt me-2"></i>Supprimer
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -284,6 +329,11 @@
                     <h3 class="card-title">Cité Céleste</h3>
                     <p class="card-text">Séjournez dans les nuages à tarif préférentiel.</p>
                     <a href="{{ path('app_detail') }}" class="card-button">En profiter</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}" class="adm-button">
+                            <i class="fas fa-sign-in-alt me-2"></i>Supprimer
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -293,6 +343,11 @@
                     <h3 class="card-title">Royaume Mystique</h3>
                     <p class="card-text">Découvrez des terres légendaires à prix spécial.</p>
                     <a href="{{ path('app_detail') }}" class="card-button">En profiter</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}" class="adm-button">
+                            <i class="fas fa-sign-in-alt me-2"></i>Supprimer
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
