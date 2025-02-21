@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+    <div class="category-page">
+        <div class="category-header">
+            <div class="category-banner" style="background-image: url('{{ category.image }}')">
+                <div class="category-overlay"></div>
+                <div class="category-content">
+                    <h1>{{ category.name }}</h1>
+                    <p>{{ category.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-filters">
+            <div class="filter-group">
+                <label>Trier par :</label>
+                <select class="sort-select">
+                    <option value="newest">Plus récent</option>
+                    <option value="price-asc">Prix croissant</option>
+                    <option value="price-desc">Prix décroissant</option>
+                    <option value="popular">Popularité</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            {% for product in category.products %}
+                {% if product.isActive %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="{{ product.imageLink }}" alt="{{ product.name }}">
+                        </div>
+                        <div class="product-info">
+                            <h3>{{ product.name }}</h3>
+                            <div class="product-meta">
+                                <span class="price">{{ product.price }} €</span>
+                                <div class="rating">
+                                    {% for i in 1..5 %}
+                                        <i class="fas fa-star {{ i <= product.rating ? 'active' : '' }}"></i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <a href="{{ path('product_show', {slug: product.slug}) }}" class="btn">Voir le produit</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %} 

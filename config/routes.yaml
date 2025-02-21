@@ -19,3 +19,15 @@ index:
     defaults:
         route: 'app_landing'
         permanent: true
+
+product_show:
+    path: /product/{slug}
+    controller: App\Controller\ProductController::show
+
+category_show:
+    path: /category/{slug}
+    controller: App\Controller\CategoryController::show
+
+app_products:
+    path: /products
+    controller: App\Controller\ProductController::index

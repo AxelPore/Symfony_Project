@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Produits{% endblock %}
+
+{% block body %}
+    <div class="products-page">
+        <h1>Nos Produits</h1>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ product.imageLink }}" alt="{{ product.name }}">
+                    <div class="product-info">
+                        <h3>{{ product.name }}</h3>
+                        <p class="price">{{ product.price }} €</p>
+                        <a href="{{ path('product_show', {slug: product.slug}) }}" class="btn">Voir</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %} 
