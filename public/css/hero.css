@@ -1,0 +1,243 @@
+/* Hero Section avec effet cyberpunk */
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    color: #00fff2;
+    background: #000;
+}
+
+#youtube-background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -1000;
+    overflow: hidden;
+    opacity: 0.8;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,255,242,0.1) 100%);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+}
+
+.background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Pour s'assurer que la vidéo couvre tout l'écran */
+@media (min-aspect-ratio: 16/9) {
+    .background-video {
+        height: 56.25vw;
+    }
+}
+@media (max-aspect-ratio: 16/9) {
+    .background-video {
+        width: 177.78vh;
+    }
+}
+
+/* Ajout d'un overlay pour mieux voir le texte */
+.hero-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Ajustez l'opacité ici */
+    z-index: -1;
+}
+
+.particle-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(2px 2px at 20px 30px, #00fffc, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #fc00ff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, #fffc00, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, #00fffc, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 130px 80px, #fc00ff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #fffc00, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: particles 4s linear infinite;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+@keyframes particles {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-200px);
+    }
+}
+
+/* Pour ajouter plus de profondeur */
+.particle-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    animation: particles 6s linear infinite;
+}
+
+.particle-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    animation: particles 8s linear infinite;
+}
+
+/* Effet Glitch pour le titre */
+.glitch {
+    font-size: 4.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                 0.025em 0.04em 0 #fffc00;
+    animation: glitch 725ms infinite;
+}
+
+.glitch span {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0,255,242,0.5);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 2rem;
+}
+
+.btn-discover {
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    color: #00fff2;
+    background: transparent;
+    border: 2px solid #00fff2;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-discover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,255,242,0.2), transparent);
+    transition: 0.5s;
+}
+
+.btn-discover:hover::before {
+    left: 100%;
+}
+
+.btn-discover:hover {
+    background: rgba(0,255,242,0.1);
+    box-shadow: 0 0 20px rgba(0,255,242,0.5);
+    transform: scale(1.05);
+}
+
+/* Animation Glitch */
+@keyframes glitch {
+    0% {
+        text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                     0.025em 0.04em 0 #fffc00;
+    }
+    15% {
+        text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                     0.025em 0.04em 0 #fffc00;
+    }
+    16% {
+        text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                     -0.05em -0.05em 0 #fffc00;
+    }
+    49% {
+        text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                     -0.05em -0.05em 0 #fffc00;
+    }
+    50% {
+        text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                     0 -0.04em 0 #fffc00;
+    }
+    99% {
+        text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                     0 -0.04em 0 #fffc00;
+    }
+    100% {
+        text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+                     -0.04em -0.025em 0 #fffc00;
+    }
+} 

@@ -2,6 +2,9 @@
 
 {% block title %}Mon Profil{% endblock %}
 
+{# Surcharge du bloc navigation pour le vider sur la page profil #}
+{% block navigation %}{% endblock %}
+
 {% block body %}
 <style>
     .profile-section {
@@ -151,11 +154,14 @@
 
         <div class="text-center">
             <div class="btn-group">
-                <a href="{{ path('app_profile_edit') }}" class="edit-button">
+                <a href="{{ path('app_home') }}" class="edit-button">
+                    Retour à l'accueil
+                </a>
+                <a href="{{ path('app_profile_edit') }}" class="edit-button" style="margin-left: 1rem;">
                     Modifier le profil
                 </a>
-                <a href="{{ path('app_home') }}" class="edit-button" style="margin-left: 1rem;">
-                    Retour à l'accueil
+                <a href="{{ path('app_logout') }}" class="edit-button" style="margin-left: 1rem;">
+                    Déconnexion
                 </a>
             </div>
         </div>

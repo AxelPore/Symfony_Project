@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+<div class="video-background">
+    <iframe 
+        src="https://youtube.com/embed/DiMnGq1zbNU?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=DiMnGq1zbNU&modestbranding=1" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameborder="0" 
+        allowfullscreen
+    ></iframe>
+</div>
+
+<div class="container">
+    <div class="cart-section">
+        <h1>Mon Panier</h1>
+        
+        {% if cart.items is not empty %}
+            <div class="cart-items">
+                {% for item in cart.items %}
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <h3>{{ item.name }}</h3>
+                            <span class="item-type">{{ item.itemType|capitalize }}</span>
+                        </div>
+                        <div class="item-price">{{ item.price }} €</div>
+                        <button class="remove-item" data-id="{{ item.id }}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div class="cart-total">
+                <h3>Total : {{ total }} €</h3>
+                <button class="checkout-button">
+                    <i class="fas fa-shopping-cart"></i>
+                    Procéder au paiement
+                </button>
+            </div>
+        {% else %}
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Votre panier est vide</h2>
+                <p>Découvrez nos mondes incroyables et commencez votre aventure !</p>
+                <a href="{{ path('app_home') }}" class="return-button">
+                    Retour aux mondes
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

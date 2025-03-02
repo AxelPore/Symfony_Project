@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - Notre E-commerce{% endblock %}
+{% block title %}FullDive VR{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -8,115 +8,559 @@
 {% endblock %}
 
 {% block body %}
-    {# Hero Section avec Parallax #}
-    <section class="hero-section">
-        <div class="hero-content" data-aos="fade-up">
-            <h1>Bienvenue sur notre boutique</h1>
-            <p>Découvrez des produits uniques et exceptionnels</p>
-            <div class="hero-buttons">
-                <a href="#featured" class="btn btn-primary">Découvrir</a>
-                <a href="{{ path('app_products') }}" class="btn btn-outline">Voir tout</a>
+    {# Uniquement le bouton profil #}
+    <div class="nav-buttons">
+        <div class="profile-button">
+            <a href="{{ path('app_profile') }}" class="btn-profile">
+                <i class="fas fa-user"></i>
+                <span>Mon Profil</span>
+            </a>
+        </div>
+
+        <div class="profile-button" style="margin-left: 20px;">
+            <a href="{{ path('cart_index') }}" class="btn-profile">
+                <i class="fas fa-shopping-cart"></i>
+                PANIER
+            </a>
+        </div>
+    </div>
+
+    <div class="home-container">
+        {# Hero section #}
+        <div class="hero">
+            <iframe class="background-video" 
+                    src="https://www.youtube.com/embed/9OhgHSFAnRM?autoplay=1&controls=0&showinfo=0&loop=1&mute=1&playlist=9OhgHSFAnRM" 
+                    frameborder="0" 
+                    allowfullscreen>
+            </iframe>
+            <div class="hero-content">
+                <h1>PLONGEZ DANS VOS RÊVES</h1>
+                <p class="hero-subtitle">Une nouvelle dimension de réalité virtuelle</p>
+                <a href="#packs" class="btn-primary">Commencer l'aventure</a>
             </div>
         </div>
-        <div class="hero-overlay"></div>
-    </section>
 
-    {# Featured Products avec Animation #}
-    <section id="featured" class="featured-products">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Produits à la une</h2>
-            <p>Nos meilleures sélections pour vous</p>
-        </div>
-        <div class="product-grid">
-            {% for product in featured_products %}
-                <div class="product-card" data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
-                    <div class="product-image">
-                        <img src="{{ product.imageLink }}" alt="{{ product.name }}">
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <a href="{{ path('product_show', {slug: product.slug}) }}" class="btn-view">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <button class="btn-cart" data-product="{{ product.id }}">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
+        {# Packs section #}
+        <section id="packs" class="packs-section">
+            <div class="pack-grid">
+                {% for key, pack in packs %}
+                    <div class="pack-card">
+                        {% if key == 'vip' %}
+                            <div class="pack-badge">Premium</div>
+                        {% endif %}
+                        
+                        <h2>{{ pack.name }}</h2>
+                        
+                        <div class="pack-description">
+                            {{ pack.description }}
+                        </div>
+
+                        <div class="pack-price">
+                            {{ pack.price }}
+                        </div>
+
+                        <div class="pack-features">
+                            <ul>
+                                {% for feature in pack.features %}
+                                    <li>
+                                        <i class="fas fa-check"></i>
+                                        {{ feature }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <button class="buy-now" 
+                                data-type="pack"
+                                data-id="{{ key }}"
+                                data-name="{{ pack.name }}"
+                                data-price="{{ pack.price }}">
+                            <i class="fas fa-shopping-cart"></i>
+                            Acheter maintenant
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        {# Section des Mondes #}
+        <section id="worlds" class="worlds-section">
+            <div class="section-title">
+                <h2>NOS MONDES</h2>
+                <div class="title-line"></div>
+            </div>
+            
+            <div class="worlds-grid">
+                {# One Piece World #}
+                <div class="world-card">
+                    <div class="world-image">
+                        <img src="{{ asset('uploads/worlds/cards/one-piece-card.jpg') }}" alt="One Piece World">
+                        <div class="world-overlay">
+                            <div class="world-difficulty">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="product-info">
-                        <h3>{{ product.name }}</h3>
-                        <div class="product-meta">
-                            <span class="price">{{ product.price }} €</span>
-                            <span class="rating">
-                                {% for i in 1..5 %}
-                                    <i class="fas fa-star {{ i <= product.rating ? 'active' : '' }}"></i>
-                                {% endfor %}
-                            </span>
+                    <div class="world-content">
+                        <h3>Grand Line</h3>
+                        <p>Naviguez sur les mers dangereuses du monde de One Piece, affrontez des pirates et partez à la recherche du One Piece.</p>
+                        <div class="world-stats">
+                            <span><i class="fas fa-users"></i> 5,800 pirates</span>
+                            <span><i class="fas fa-map"></i> 4 mers</span>
                         </div>
+                        <button class="world-button" data-world="one-piece">Embarquer</button>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </section>
 
-    {# Categories avec Hover Effects #}
-    <section class="categories-section" data-aos="fade-up">
-        <div class="section-header">
-            <h2>Explorez nos catégories</h2>
-            <p>Trouvez ce qui vous correspond</p>
-        </div>
-        <div class="categories-grid">
-            {% for category in categories %}
-                <div class="category-card" data-aos="zoom-in" data-aos-delay="{{ loop.index * 100 }}">
-                    <img src="{{ category.image }}" alt="{{ category.name }}">
-                    <div class="category-content">
-                        <h3>{{ category.name }}</h3>
-                        <p>{{ category.description }}</p>
-                        <a href="{{ path('category_show', {slug: category.slug}) }}" class="btn-category">
-                            Découvrir
-                        </a>
+                {# Naruto World #}
+                <div class="world-card">
+                    <div class="world-image">
+                        <img src="{{ asset('uploads/worlds/cards/naruto-card.jpg') }}" alt="Naruto World">
+                        <div class="world-overlay">
+                            <div class="world-difficulty">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="world-content">
+                        <h3>Konoha</h3>
+                        <p>Devenez un ninja dans le monde de Naruto, maîtrisez les jutsus et protégez votre village.</p>
+                        <div class="world-stats">
+                            <span><i class="fas fa-users"></i> 4,200 ninjas</span>
+                            <span><i class="fas fa-map"></i> 5 villages</span>
+                        </div>
+                        <button class="world-button" data-world="naruto">S'entraîner</button>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </section>
 
-    {# New Products avec Slider #}
-    <section class="new-products-section">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Dernières nouveautés</h2>
-            <p>Ne manquez pas nos derniers arrivages</p>
-        </div>
-        <div class="new-products-slider" data-aos="fade-up">
-            {% for product in new_products %}
-                <div class="product-slide">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ product.imageLink }}" alt="{{ product.name }}">
-                            <div class="product-badge">Nouveau</div>
-                        </div>
-                        <div class="product-info">
-                            <h3>{{ product.name }}</h3>
-                            <p class="price">{{ product.price }} €</p>
-                            <a href="{{ path('product_show', {slug: product.slug}) }}" class="btn-product">
-                                Découvrir
-                            </a>
+                {# Sword Art Online - Alfheim #}
+                <div class="world-card">
+                    <div class="world-image">
+                        <img src="{{ asset('uploads/worlds/cards/alfheim-card.jpg') }}" alt="Alfheim World">
+                        <div class="world-overlay">
+                            <div class="world-difficulty">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
                         </div>
                     </div>
+                    <div class="world-content">
+                        <h3>Alfheim</h3>
+                        <p>Volez librement dans le monde des fées, participez à des raids épiques et explorez l'Arbre Mondial.</p>
+                        <div class="world-stats">
+                            <span><i class="fas fa-users"></i> 3,500 fées</span>
+                            <span><i class="fas fa-map"></i> 9 royaumes</span>
+                        </div>
+                        <button class="world-button" data-world="alfheim">S'envoler</button>
+                    </div>
                 </div>
-            {% endfor %}
+
+                {# My Hero Academia World #}
+                <div class="world-card">
+                    <div class="world-image">
+                        <img src="{{ asset('uploads/worlds/cards/ua-academy-card.jpg') }}" alt="UA Academy">
+                        <div class="world-overlay">
+                            <div class="world-difficulty">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="world-content">
+                        <h3>UA Academy</h3>
+                        <p>Développez votre Alter et devenez un héros professionnel dans le monde de My Hero Academia.</p>
+                        <div class="world-stats">
+                            <span><i class="fas fa-users"></i> 2,800 héros</span>
+                            <span><i class="fas fa-map"></i> 6 zones</span>
+                        </div>
+                        <button class="world-button" data-world="ua-academy">S'inscrire</button>
+                    </div>
+                </div>
+
+                {# Dragon Ball World - 3 étoiles #}
+                <div class="world-card">
+                    <div class="world-image">
+                        <img src="{{ asset('uploads/worlds/cards/dragon-ball-card.jpg') }}" alt="Dragon Ball World">
+                        <div class="world-overlay">
+                            <div class="world-difficulty">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="world-content">
+                        <h3>Super Terre</h3>
+                        <p>Entraînez-vous avec les plus grands guerriers, maîtrisez le Ki et participez au tournoi mondial.</p>
+                        <div class="world-stats">
+                            <span><i class="fas fa-users"></i> 3,100 guerriers</span>
+                            <span><i class="fas fa-map"></i> 7 planètes</span>
+                        </div>
+                        <button class="world-button" data-world="dragon-ball">S'entraîner</button>
+                    </div>
+                </div>
+
+                {# Violet Evergarden World - 5 étoiles #}
+                <div class="world-card">
+                    <div class="world-image">
+                        <img src="{{ asset('uploads/worlds/cards/violet-evergarden-card.jpg') }}" alt="Violet Evergarden World">
+                        <div class="world-overlay">
+                            <div class="world-difficulty">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="world-content">
+                        <h3>Service Postal Auto-Memory</h3>
+                        <p>Devenez une poupée de souvenirs automatiques et aidez les gens à exprimer leurs sentiments à travers des lettres.</p>
+                        <div class="world-stats">
+                            <span><i class="fas fa-users"></i> 1,500 écrivains</span>
+                            <span><i class="fas fa-map"></i> 4 régions</span>
+                        </div>
+                        <button class="world-button" data-world="violet-evergarden">Écrire</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {# Section des Popups #}
+    <div class="popup-container">
+        {# One Piece Popup #}
+        <div id="popup-one-piece" class="world-popup">
+            <div class="popup-content">
+                <button class="popup-close">&times;</button>
+                <h2>One Piece</h2>
+                <div class="popup-image">
+                    <img src="{{ asset('uploads/worlds/details/one-piece-detail.jpg') }}" alt="One Piece World Detail">
+                </div>
+                <div class="popup-description">
+                    <p>Embarquez pour une aventure épique dans le monde de One Piece ! Naviguez sur les mers dangereuses, constituez votre équipage et partez à la recherche du trésor ultime.</p>
+                </div>
+                <div class="popup-features">
+                    <h3>Caractéristiques du monde</h3>
+                    <ul>
+                        <li>Créez votre propre équipage de pirates</li>
+                        <li>Explorez les 4 mers et Grand Line</li>
+                        <li>Découvrez et maîtrisez les fruits du démon</li>
+                        <li>Participez aux guerres des territoires</li>
+                    </ul>
+                </div>
+                <div class="popup-actions">
+                    <div class="world-price">499 €</div>
+                    <button class="buy-now" 
+                            data-type="world"
+                            data-id="one-piece"
+                            data-name="One Piece"
+                            data-price="499">
+                        <i class="fas fa-shopping-cart"></i>
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
         </div>
-    </section>
+
+        {# Naruto Popup #}
+        <div id="popup-naruto" class="world-popup">
+            <button class="popup-close">×</button>
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>Konoha</h2>
+                </div>
+                <div class="popup-image">
+                    <img src="{{ asset('uploads/worlds/details/naruto-detail.jpg') }}" alt="Naruto World">
+                </div>
+                <div class="popup-description">
+                    <p>Plongez dans l'univers ninja de Naruto ! Développez vos compétences, maîtrisez les jutsus et protégez votre village. Devenez le prochain Hokage !</p>
+                </div>
+                <div class="popup-features">
+                    <h3>Caractéristiques du monde</h3>
+                    <ul>
+                        <li>Choisissez votre village caché</li>
+                        <li>Apprenez plus de 100 jutsus différents</li>
+                        <li>Formez votre équipe de 3 ninjas</li>
+                        <li>Participez aux examens Chunin</li>
+                        <li>Explorez le monde ninja en missions</li>
+                    </ul>
+                </div>
+                <div class="popup-actions">
+                    <div class="world-price">599 €</div>
+                    <button class="buy-now" 
+                            data-type="world"
+                            data-id="naruto"
+                            data-name="Konoha"
+                            data-price="599">
+                        <i class="fas fa-shopping-cart"></i>
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {# Alfheim (SAO) Popup #}
+        <div id="popup-alfheim" class="world-popup">
+            <button class="popup-close">×</button>
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>Alfheim Online</h2>
+                </div>
+                <div class="popup-image">
+                    <img src="{{ asset('uploads/worlds/details/alfheim-detail.jpg') }}" alt="Alfheim World">
+                </div>
+                <div class="popup-description">
+                    <p>Volez librement dans le monde magique d'Alfheim ! Choisissez votre race de fées, maîtrisez la magie et participez à des batailles épiques dans les airs.</p>
+                </div>
+                <div class="popup-features">
+                    <h3>Caractéristiques du monde</h3>
+                    <ul>
+                        <li>9 races de fées uniques</li>
+                        <li>Vol illimité dans tout le monde</li>
+                        <li>Système de combat aérien avancé</li>
+                        <li>Donjons et raids en groupe</li>
+                        <li>Quêtes d'exploration de l'Arbre Mondial</li>
+                    </ul>
+                </div>
+                <div class="popup-actions">
+                    <div class="world-price">699 €</div>
+                    <button class="buy-now" 
+                            data-type="world"
+                            data-id="alfheim"
+                            data-name="Alfheim"
+                            data-price="699">
+                        <i class="fas fa-shopping-cart"></i>
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {# Dragon Ball World Popup #}
+        <div id="popup-dragon-ball" class="world-popup">
+            <button class="popup-close">×</button>
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>Dragon World</h2>
+                </div>
+                <div class="popup-image">
+                    <img src="{{ asset('uploads/worlds/details/dragon-ball-detail.jpg') }}" alt="Dragon Ball World">
+                </div>
+                <div class="popup-description">
+                    <p>Devenez un guerrier légendaire dans l'univers de Dragon Ball ! Entraînez-vous avec les plus grands maîtres, participez au tournoi mondial et protégez la Terre des menaces intergalactiques.</p>
+                </div>
+                <div class="popup-features">
+                    <h3>Caractéristiques du monde</h3>
+                    <ul>
+                        <li>Transformations Super Saiyan</li>
+                        <li>Combat aérien et au sol</li>
+                        <li>Entraînement avec les personnages iconiques</li>
+                        <li>Quête des Dragon Balls</li>
+                        <li>Tournoi du pouvoir intergalactique</li>
+                    </ul>
+                </div>
+                <div class="popup-actions">
+                    <div class="world-price">799 €</div>
+                    <button class="buy-now" 
+                            data-type="world"
+                            data-id="dragon-ball"
+                            data-name="Dragon Ball"
+                            data-price="799">
+                        <i class="fas fa-shopping-cart"></i>
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {# Violet Evergarden Popup #}
+        <div id="popup-violet-evergarden" class="world-popup">
+            <button class="popup-close">×</button>
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>Service Postal Auto-Memory</h2>
+                </div>
+                <div class="popup-image">
+                    <img src="{{ asset('uploads/worlds/details/violet-evergarden-detail.jpg') }}" alt="Violet Evergarden World">
+                </div>
+                <div class="popup-description">
+                    <p>Plongez dans le monde émouvant de Violet Evergarden. En tant que poupée de souvenirs automatiques, vous aiderez les gens à mettre leurs sentiments en mots, tout en découvrant la signification de l'amour et des émotions humaines.</p>
+                </div>
+                <div class="popup-features">
+                    <h3>Caractéristiques du monde</h3>
+                    <ul>
+                        <li>Apprenez l'art de l'écriture émotionnelle</li>
+                        <li>Voyagez à travers différentes villes et rencontrez des clients uniques</li>
+                        <li>Personnalisez votre machine à écrire</li>
+                        <li>Participez aux formations de la Compagnie Postale CH</li>
+                        <li>Développez vos compétences en communication</li>
+                        <li>Découvrez des histoires personnelles touchantes</li>
+                    </ul>
+                </div>
+                <div class="popup-actions">
+                    <div class="world-price">549 €</div>
+                    <button class="buy-now" 
+                            data-type="world"
+                            data-id="violet-evergarden"
+                            data-name="Service Postal Auto-Memory"
+                            data-price="549">
+                        <i class="fas fa-shopping-cart"></i>
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {# My Hero Academia Popup #}
+        <div id="popup-ua-academy" class="world-popup">
+            <button class="popup-close">×</button>
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>UA Academy</h2>
+                </div>
+                <div class="popup-image">
+                    <img src="{{ asset('uploads/worlds/details/ua-academy-detail.jpg') }}" alt="My Hero Academia World">
+                </div>
+                <div class="popup-description">
+                    <p>Intégrez la prestigieuse UA Academy et suivez les pas des plus grands héros ! Développez votre Alter unique, apprenez à maîtriser vos pouvoirs et devenez le prochain Symbol of Peace dans un monde où 80% de la population possède des super-pouvoirs.</p>
+                </div>
+                <div class="popup-features">
+                    <h3>Caractéristiques du monde</h3>
+                    <ul>
+                        <li>Créez votre propre Alter personnalisé</li>
+                        <li>Entraînez-vous avec All Might et les pros</li>
+                        <li>Participez au festival sportif de UA</li>
+                        <li>Effectuez des stages chez les héros pros</li>
+                        <li>Affrontez la Ligue des Vilains</li>
+                        <li>Développez vos techniques spéciales</li>
+                        <li>Formez votre propre agence de héros</li>
+                    </ul>
+                </div>
+                <div class="popup-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <span>Classes de 20 étudiants</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Campus complet accessible</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <span>Classement héroïque évolutif</span>
+                    </div>
+                </div>
+                <div class="popup-actions">
+                    <div class="world-price">749 €</div>
+                    <button class="buy-now" 
+                            data-type="world"
+                            data-id="ua-academy"
+                            data-name="UA Academy"
+                            data-price="749">
+                        <i class="fas fa-shopping-cart"></i>
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-overlay"></div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-background', {
+                videoId: '9OhgHSFAnRM',    // L'ID de votre vidéo YouTube
+                playerVars: {
+                    autoplay: 1,            // Auto-play la vidéo
+                    controls: 0,            // Cache les contrôles
+                    showinfo: 0,            // Cache les infos
+                    modestbranding: 1,      // Logo YouTube minimal
+                    loop: 1,                // Lecture en boucle
+                    fs: 0,                  // Pas de bouton plein écran
+                    cc_load_policy: 0,      // Cache les sous-titres
+                    iv_load_policy: 3,      // Cache les annotations
+                    autohide: 0,
+                    playlist: '9OhgHSFAnRM' // Nécessaire pour la lecture en boucle
+                },
+                events: {
+                    onReady: function(e) {
+                        e.target.mute();    // Coupe le son
+                        e.target.playVideo();// Lance la vidéo
+                    }
+                }
+            });
+        }
+
+        // Ajustement de la taille de la vidéo
+        function onPlayerReady(event) {
+            event.target.playVideo();
+            resizeVideo();
+        }
+
+        // Redimensionnement responsive
+        function resizeVideo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const aspectRatio = 16/9;
+
+            let newWidth, newHeight;
+
+            if (width / height > aspectRatio) {
+                newWidth = width;
+                newHeight = width / aspectRatio;
+            } else {
+                newWidth = height * aspectRatio;
+                newHeight = height;
+            }
+
+            if (player) {
+                player.setSize(newWidth, newHeight);
+            }
+        }
+
+        window.addEventListener('resize', resizeVideo);
+
+        // Animation au scroll
         AOS.init({
             duration: 800,
             easing: 'ease-in-out',
             once: true
         });
+
+        // Smooth scroll pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation du titre glitch
+        const glitchTitle = document.querySelector('.glitch');
+        setInterval(() => {
+            glitchTitle.classList.add('glitch-active');
+            setTimeout(() => {
+                glitchTitle.classList.remove('glitch-active');
+            }, 200);
+        }, 3000);
     </script>
 {% endblock %}

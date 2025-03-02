@@ -262,4 +262,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->socialMediaLinks = $socialMediaLinks;
         return $this;
     }
+
+    public function setMoney(int $money): static
+    {
+        $this->money = $money;
+
+        return $this;
+    }
 }

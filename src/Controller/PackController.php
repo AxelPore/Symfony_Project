@@ -2,24 +2,19 @@
 
 namespace App\Controller;
 
-use App\Repository\ProductRepository;
-use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class PackController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
-    public function index(
-        ProductRepository $productRepository,
-        CategoryRepository $categoryRepository
-    ): Response
+    #[Route('/packs', name: 'app_pack_index')]
+    public function index(): Response
     {
         $packs = [
             'basic' => [
                 'name' => 'Pack Basic',
-                'price' => 5000,
+                'price' => 499,
                 'description' => 'Le pack essentiel pour débuter votre aventure en Full Dive',
                 'features' => [
                     'Casque FullDive VR',
@@ -29,7 +24,7 @@ class HomeController extends AbstractController
             ],
             'explorer' => [
                 'name' => 'Pack Explorer',
-                'price' => 7500,
+                'price' => 699,
                 'description' => 'L\'expérience idéale pour les aventuriers',
                 'features' => [
                     'Casque FullDive VR',
@@ -40,7 +35,7 @@ class HomeController extends AbstractController
             ],
             'vip' => [
                 'name' => 'Pack V.I.P',
-                'price' => 12000,
+                'price' => 999,
                 'description' => 'L\'expérience ultime en Full Dive',
                 'features' => [
                     'Casque FullDive VR',
@@ -52,11 +47,7 @@ class HomeController extends AbstractController
             ]
         ];
 
-        return $this->render('home/index.html.twig', [
-            'featured_products' => $productRepository->findFeaturedProducts(),
-            'new_products' => $productRepository->findNewProducts(),
-            'categories' => $categoryRepository->findMainCategories(),
-            'best_sellers' => $productRepository->findBestSellers(),
+        return $this->render('pack/index.html.twig', [
             'packs' => $packs
         ]);
     }

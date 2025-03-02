@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Packs{% endblock %}
+
+{% block body %}
+<div class="pack-container">
+    <div class="pack-grid">
+        {% for key, pack in packs %}
+            <div class="pack-card">
+                {% if key == 'vip' %}
+                    <div class="pack-badge">Premium</div>
+                {% endif %}
+                
+                <h2>{{ pack.name }}</h2>
+                
+                <div class="pack-description">
+                    {{ pack.description }}
+                </div>
+
+                <div class="pack-price">
+                    {{ pack.price }}
+                </div>
+
+                <div class="pack-features">
+                    <ul>
+                        {% for feature in pack.features %}
+                            <li>
+                                <i class="fas fa-check"></i>
+                                {{ feature }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button class="buy-now">
+                    <i class="fas fa-shopping-cart"></i>
+                    Acheter maintenant
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 
