@@ -166,7 +166,7 @@
             <div class="terms-checkbox">
                 {{ form_widget(registrationForm.agreeTerms) }}
                 <label for="{{ registrationForm.agreeTerms.vars.id }}">
-                    J'accepte les <a href="#" style="color: #00ffff;">conditions d'utilisation</a>
+                    J'accepte les <a href="{{ path('app_terms') }}" style="color: #00ffff;">conditions d'utilisation</a>
                 </label>
                 <div class="error-message">{{ form_errors(registrationForm.agreeTerms) }}</div>
             </div>
